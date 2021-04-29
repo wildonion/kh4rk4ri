@@ -21,13 +21,13 @@ from models import LogisticRegression, LinearRegression, SupportVectorMachine, R
 # -----------------------------------------------
 parser = argparse.ArgumentParser(description='Movie Review Sentiment Analysis')
 parser.add_argument('--model', action='store', type=str, help='naive_bayesian, support_vector_machine, random_forest, logistic_regression, linear_regression ', required=True)
-parser.add_argument('--training-data-csv-path', action='store', type=str, help='The training data CSV file', required=True)
-parser.add_argument('--labeled-data-csv-path', action='store', type=int, help='The labeled data CSV file', required=True)
+parser.add_argument('--x-train-path', action='store', type=str, help='The training data CSV file path', required=True)
+parser.add_argument('--y-train-path', action='store', type=int, help='The labeled data CSV file path', required=True)
 
 args                = parser.parse_args()
 model               = args.model
-data_path           = args.training_data_csv_path
-labels_path         = args.labeled_data_csv_path
+data_path           = args.x_train_path
+labels_path         = args.y_train_path
 preprocessed        = Preprocessor(paths=[data_path, labels_path]) 
 training_dataloader = DataLoader(preprocessed=preprocessed)
 
