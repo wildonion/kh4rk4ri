@@ -1,1 +1,2 @@
-dataset/train/
+dataset/train/x_train.csv
+dataset/train/y_train.csv
