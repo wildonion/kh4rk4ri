@@ -1,3 +1,7 @@
 dataset/train/x_train.csv
 dataset/train/y_train.csv
+dataset/test/x_test.csv
+dataset/test/y_test.csv
+dataset/valid/x_valid.csv
+dataset/valid/y_valid.csv
 __pycache__
