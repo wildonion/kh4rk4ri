@@ -28,7 +28,7 @@ class Preprocessor:
         # NOTE - in BOW we'll have frequencies, rather than just 1 or 0 for their occurrence in ngram.
         # NOTE - we're using BOW with TF-IDF normalization for building our vocabulary and feature extraction.
         self.__punctuations = string.punctuation
-        self.__en_nlp = spacy.load('en')
+        spacy.load('en')
         self.__stop_words = STOP_WORDS
 
 
