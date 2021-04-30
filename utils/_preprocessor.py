@@ -9,6 +9,9 @@ import os, random
 import string
 from spacy.lang.en.stop_words import STOP_WORDS
 from spacy.lang.en import English
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.base import TransformerMixin
+from sklearn.pipeline import Pipeline
 
 
 __all__ = ["Preprocessor"]
@@ -30,18 +33,32 @@ class Preprocessor:
         self.__punctuations = string.punctuation
         spacy.load('en')
         self.__stop_words = STOP_WORDS
-
+        bag_of_words = CountVectorizer(tokenizer=self.__tokenizer, ngram_range=(1,1))
+        tfidf_vector = TfidfVectorizer(tokenizer=self.__tokenizer)
 
 
     def __call__(self):
         # TODO - plot the tokenized data
-        pass
+        return self
 
 
-    def tokenizer(self, doc):
+    def __tokenizer(self, doc):
         # NOTE - -PRON- is used as the lemma for all personal pronouns.
         # NOTE - doc might contains multiple sentences which is our training text. 
         tokens = [word.lemma_.lower().strip() if word.lemma_ != "-PRON-" else word.lemma_ for word in self.__parser(doc)]
         tokens = [word for word in tokens if word not in self.__stop_words and word not in self.__punctuations]
         return tokens
         
+
+class CustomTransformer(TransformerMixin):
+    def transform(self, doc, **transform_params):
+        return [self.clean_text(text) for text in doc]
+
+    def fit(self, doc, y=None, **fit_params):
+        return self
+
+    def get_params(self, deep=True):
+        return {}
+
+    def clean_text(self, text):
+        return text.strip().lower()
