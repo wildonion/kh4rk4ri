@@ -1,15 +1,18 @@
 
 
 
-from ..utils._dataloader import DataLoader
 
 
-__all__ ["LinearRegression"]
+
+import sys
+sys.path.append("..")
+from utils import DataLoader
+from ._base import BaseLine
+
+__all__ = ["LinearRegression"]
 
 
-class LinearRegression:
+class LinearRegression(BaseLine):
     def __init__(self, training_dataloader: DataLoader):
-        self.dataloader = DataLoader
-
-    def __call__(self):
-        pass
+        args = {"dataloader": DataLoader}
+        super().__init__(**args)
