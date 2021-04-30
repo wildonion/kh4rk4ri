@@ -18,7 +18,8 @@ args                = parser.parse_args()
 model               = args.model
 train_path          = args.train_path
 test_path           = args.test_path
-preprocessed        = Preprocessor(paths=[train_path]) 
+preprocessed        = Preprocessor(paths=[train_path])
+print(preprocessed()) # NOTE - it'll return the self
 training_dataloader = DataLoader(preprocessed=preprocessed)
 
 
