@@ -29,7 +29,7 @@ class Preprocessor:
         # NOTE - we're using BOW with TF-IDF normalization for building our vocabulary and feature extraction.
         self.__punctuations = string.punctuation
         self.__en_nlp = spacy.load('en')
-        self.__stop_words = spacy.lang.en.stop_words.STOP_WORDS
+        self.__stop_words = STOP_WORDS
 
 
 
