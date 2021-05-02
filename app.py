@@ -2,7 +2,7 @@
 
 import argparse
 import plotly.graph_objects as go
-from utils import DataLoader, Preprocessor
+from utils import DataLoader, Preprocessor, Transformer
 from models import LogisticRegression, LinearRegression, SupportVectorMachine, RandomForest, NaiveBayesian
 
 
@@ -17,8 +17,9 @@ args                = parser.parse_args()
 model               = args.model
 train_path          = args.train_path
 test_path           = args.test_path
-preprocessed        = Preprocessor(paths=[train_path]) # NOTE - preprocessed() will return the self
-training_dataloader = DataLoader(preprocessed=preprocessed, transformer=preprocessed.Transformer)
+preprocessed        = Preprocessor(paths=[train_path])
+print(preprocessed()) # NOTE - preprocessed() will return the self
+training_dataloader = DataLoader(preprocessed=preprocessed, transformer=Transformer)
 
 
 
