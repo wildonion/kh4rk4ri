@@ -38,6 +38,17 @@ class Preprocessor:
         return self
 
 
+    def __getitem__(self):
+        # TODO -
+        pass
+
+
+    def __len__(self):
+        # TODO -
+        pass
+
+
+
     def tokenizer(self, doc):
         # NOTE - -PRON- is used as the lemma for all personal pronouns.
         # NOTE - doc might contains multiple sentences which is our training text. 
