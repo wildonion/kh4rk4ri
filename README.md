@@ -4,13 +4,13 @@
 
 # Usage
 
-> For argument options details run `python app.py --help`
-
 ```python app.py --model naive_bayesian_gauss --train-path dataset/train --test-path dataset/test```
+
+> For argument options details run `python app.py --help`
 
 # Dataset
 
-> [Project Explanation](https://github.com/HamedBabaei/ML992/tree/main/dataset)
+[Project Explanation](https://github.com/HamedBabaei/ML992/tree/main/dataset)
 
 # Preprocessing
 
