@@ -21,4 +21,4 @@ class BaseLine:
 
     def train(self):
         pipe = self.dataloader(self.model)
-        pipe.fit(self.dataloader.x_train, self.dataloader.y_train)
+        pipe.fit(self.dataloader.preprocessed.x_train, self.dataloader.preprocessed.y_train)
