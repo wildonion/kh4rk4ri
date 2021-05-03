@@ -10,7 +10,7 @@
 
 # Dataset
 
-[Project Explanation](https://github.com/HamedBabaei/ML992/tree/main/dataset)
+[Movie Review Dataset](https://github.com/HamedBabaei/ML992/tree/main/dataset)
 
 # Preprocessing
 
