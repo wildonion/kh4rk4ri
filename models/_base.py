@@ -6,19 +6,24 @@
 
 
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score
+from sklearn.pipeline import Pipeline
 
 
 class BaseLine:
     def __init__(self, *args, **kwargs):
         self.dataloader = kwargs["dataloader"]
         self.model      = kwargs["model"]
+        self.dataloader.pipeline = Pipeline([("cleaner", self.dataloader.transformer()),
+                                             ('vectorizer', self.dataloader.dataset.vectorizer()),
+                                             ('classifier', self.model)])
 
     def stat(self):
         pass
 
+
     def __call__(self):
         pass
 
+
     def train(self):
-        pipe = self.dataloader(self.model)
-        pipe.fit(self.dataloader.preprocessed.x_train, self.dataloader.preprocessed.y_train)
+        self.dataloader.pipeline.fit(self.dataloader.dataset.x_train, self.dataloader.dataset.y_train)
