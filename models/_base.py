@@ -46,7 +46,7 @@ class BaseLine:
 
     def __call__(self, paths: List[str]):
         if not os.path.exists(paths[0]): print("[?] CSV Test File Not Found!"); sys.exit(1)
-        input_test_data = pd.read_csv(f"{paths[0]}/data.csv")
+        input_test_data = pd.read_csv(f"{paths[0]}/x_test.csv")
         predicted_input_test_data = self.dataloader.pipeline.predict(input_test_data["text"]) # NOTE - all preprocessing is done through the pipeline estimators we've built
         input_test_data['label'] = predicted_input_test_data.tolist()
         curr_dir = os.path.dirname(os.path.abspath(__file__))
