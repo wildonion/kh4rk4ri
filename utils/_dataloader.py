@@ -4,7 +4,7 @@
 
 
 from typing import List
-from ._transformer import Transformer, ToDense
+from ._transformer import Transformer
 from ._preprocessor import MRSADatasetPipeline
 from sklearn.model_selection import train_test_split
 
@@ -13,7 +13,7 @@ __all__ = ["DataLoader"]
 
 
 class DataLoader:
-    def __init__(self, preprocessed: MRSADatasetPipeline, transformers: List[Transformer, ToDense], shuffle: bool):
+    def __init__(self, preprocessed: MRSADatasetPipeline, transformers: List[Transformer], shuffle: bool):
         self.dataset      =  preprocessed
         self.transformers = transformers
         self.pipeline     = None

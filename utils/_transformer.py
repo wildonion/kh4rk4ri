@@ -9,7 +9,7 @@
 from sklearn.base import TransformerMixin
 
 
-__all__ = ["Transformer", "ToDense"]
+__all__ = ["Transformer"]
 
 class Transformer(TransformerMixin):
     def transform(self, doc, **transform_params):
@@ -23,11 +23,3 @@ class Transformer(TransformerMixin):
 
     def clean_text(self, text):
         return text.strip().lower()
-
-
-class ToDense(TransformerMixin):
-    def fit(self, doc, y=None, **fit_params):
-        return self
-
-    def transform(self, doc, y=None, **fit_params):
-        return X.todense()
