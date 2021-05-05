@@ -43,7 +43,7 @@ class MRSADatasetPipeline(Dataset):
         return len(self.x_train)
 
 
-    def __call__(self, classifier):
+    def __call__(self):
         pass
 
 
@@ -57,11 +57,15 @@ class MRSADatasetPipeline(Dataset):
 
     def vectorizer(self):
         # NOTE - in BOW we'll have frequencies, rather than just 1 or 0 for their occurrence in ngram.
-        # NOTE - CountVectorizer, HashingVectorizer and TfidfVectorizer will crash on making a huge vocabulary dictionary in memory
+        # NOTE - CountVectorizer, HashingVectorizer and TfidfVectorizer will crash on making a huge 
+        #        vocabulary dictionary based on a dense matrix in memory when we're trying to 
+        #        use naive bayes gaussian algo. cause the inputs of the naive bayes gaussian model 
+        #        is a dense matrix and as the name of the algo says it's based on probability distribution 
+        #        not a sparse matrix which is the output of vectorization algos.   
         # NOTE - we're using BOW with TF-IDF normalization for building our vocabulary and feature extraction.
         # self.bag_of_words = CountVectorizer(tokenizer=self.tokenizer, ngram_range=(1,1))
-        self.bag_of_words = HashingVectorizer(tokenizer=self.tokenizer, ngram_range=(1,1))
-        self.tfidf_vector = TfidfVectorizer(tokenizer=self.tokenizer, max_features=23000)
+        # self.bag_of_words = HashingVectorizer(tokenizer=self.tokenizer, ngram_range=(1,1))
+        self.tfidf_vector = TfidfVectorizer(tokenizer=self.tokenizer)
         return self.tfidf_vector
 
 
