@@ -45,10 +45,10 @@ Finally we called the `train()` method on the selected model to train it using t
 
 ### 📊 Confusion Matrix for Naive Bayes Multinomial Algorithm
 <p align="center">
-    <img src="https://github.com/wildonion/mrsa/tree/main/utils/confusion_matrix.png">
+    <img src="https://github.com/wildonion/mrsa/blob/main/utils/cmat/MultinomialNB.png">
 </p>
 
-[Confusion Matrix for other Models]()
+[Confusion Matrix for other Models](https://github.com/wildonion/mrsa/tree/main/utils/cmat)
 
 # Classifying Process on Test Data
 
@@ -56,4 +56,4 @@ For testing our models we've just passed the CSV file path of the test data thro
 
 Then we saved our labeled data into a new CSV file based on the selected model.
 
-[Labeled Test Data]()
+[Labeled Test Data](https://github.com/wildonion/mrsa/tree/main/utils/labeled)
