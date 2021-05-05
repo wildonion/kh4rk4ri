@@ -1,6 +1,15 @@
 # Setup
 
+### pip
 ```pip install -r requirements.txt```
+
+### Anaconda
+
+```conda create --name mrsa --file requirements.txt && conda activate mrsa```
+
+And finally:
+
+```python -m spacy download en```
 
 # Usage
 
@@ -14,7 +23,7 @@
 
 # Preprocessing
 
-The `MRSADatasetPipeline` class is responsible for tokenizing(lemmatization and lowercase converting), cleaning(stopwords and punctuations removal) and vectorizing(BOW and TF-IDF).
+The `MRSADatasetPipeline` class is responsible for tokenizing(lemmatization and lowercase converting), cleaning(stopwords and punctuations removal) and vectorization using BOW with TF-IDF normalization.
 
 Preprocessed input texts of our training documents are passed through the `DataLoader` object to split the training documents into `x_train`, `y_train`, `x_test` and `y_test` with 20 percent of test data.
 
