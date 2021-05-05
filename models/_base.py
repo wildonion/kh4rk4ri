@@ -13,11 +13,13 @@ class BaseLine:
     def __init__(self, *args, **kwargs):
         self.dataloader = kwargs["dataloader"]
         self.model      = kwargs["model"]
-        self.dataloader.pipeline = Pipeline([("cleaner", self.dataloader.transformer()),
+        self.dataloader.pipeline = Pipeline([("cleaner", self.dataloader.transformers[0]()),
                                              ('vectorizer', self.dataloader.dataset.vectorizer()),
+                                             ('to_dense', self.dataloader.transformers[1]()),
                                              ('classifier', self.model)])
 
     def stat(self):
+        # TODO - scores and plotting
         pass
 
 
