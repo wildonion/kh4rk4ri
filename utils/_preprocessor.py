@@ -11,9 +11,9 @@ import pandas as pd
 import os, string
 from spacy.lang.en.stop_words import STOP_WORDS
 from spacy.lang.en import English
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, HashingVectorizer
+import spacy
 spacy.load('en')
-
 
 
 __all__ = ["MRSADatasetPipeline"]
@@ -28,9 +28,11 @@ class MRSADatasetPipeline(Dataset):
         self.__punctuations = string.punctuation
         self.__stop_words   = STOP_WORDS
         self.x_train        = pd.read_csv(self.__data_path)["text"]
-        self.y_train,       = pd.read_csv(self.__labels_path)["label"] 
+        self.y_train        = pd.read_csv(self.__labels_path)["label"] 
         self.x_test         = None
         self.y_test         = None
+        self.bag_of_words   = None
+        self.tfidf_vector   = None
 
 
     def __getitem__(self, idx):
@@ -55,9 +57,11 @@ class MRSADatasetPipeline(Dataset):
 
     def vectorizer(self):
         # NOTE - in BOW we'll have frequencies, rather than just 1 or 0 for their occurrence in ngram.
-        self.bag_of_words = CountVectorizer(tokenizer=self.tokenizer, ngram_range=(1,1))
+        # NOTE - CountVectorizer, HashingVectorizer and TfidfVectorizer will crash on making a huge vocabulary dictionary in memory
         # NOTE - we're using BOW with TF-IDF normalization for building our vocabulary and feature extraction.
-        self.tfidf_vector = TfidfVectorizer(tokenizer=self.tokenizer)
+        # self.bag_of_words = CountVectorizer(tokenizer=self.tokenizer, ngram_range=(1,1))
+        self.bag_of_words = HashingVectorizer(tokenizer=self.tokenizer, ngram_range=(1,1))
+        self.tfidf_vector = TfidfVectorizer(tokenizer=self.tokenizer, max_features=23000)
         return self.tfidf_vector
 
 
