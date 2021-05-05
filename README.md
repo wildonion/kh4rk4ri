@@ -29,9 +29,9 @@ Preprocessed input texts of our training documents are passed through the `DataL
 
 # Training Process
 
-After that the dataloader object is feeded into the various ML models like **Naive Bayesian GaussianNB and MultinomialNB**, **Logistic and Linear Regression**, **Support Vector Machine** and **Random Forest** to build its pipeline based on preprocessed and transformed(using `Transformer` and `ToDense` classes) data and the selected model.
+After that the dataloader object is feeded into the various ML models like **Naive Bayesian GaussianNB and MultinomialNB**, **Logistic and Linear Regression**, **Support Vector Machine** and **Random Forest** to fill its pipeline based on preprocessed and transformed(using `Transformer` and `ToDense` classes) data and the selected model.
 
-Finally we called the `train()` method on the selected model to train and feed the training data to it using the training dataloader object pipeline. Below are calculated and plotted statistical results for each model. 
+Finally we called the `train()` method on the selected model to train it using the training dataloader object pipeline. Below are calculated and plotted statistical results for each model. 
 
 # Statistical Results
 
