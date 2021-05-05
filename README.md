@@ -35,18 +35,18 @@ Finally we called the `train()` method on the selected model to train it using t
 
 # Statistical Results
 
-> Accuracy : 0.869625
-
-> Precision : 0.88301404853129
-
-> Recall : 0.85526966848095
-
-> f1_score : 0.8689204474048009
-
 ### 📊 Confusion Matrix for Naive Bayes Multinomial Algorithm
 <p align="center">
     <img src="https://github.com/wildonion/mrsa/blob/main/utils/cmat/MultinomialNB.png">
 </p>
+
+* **Accuracy** : 0.869625
+
+* **Precision** : 0.88301404853129
+
+* **Recall** : 0.85526966848095
+
+* **f1_score** : 0.8689204474048009
 
 [Confusion Matrix for other Models](https://github.com/wildonion/mrsa/tree/main/utils/cmat)
 
