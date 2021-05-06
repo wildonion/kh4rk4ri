@@ -6,3 +6,4 @@ dataset/valid/x_valid.csv
 dataset/valid/y_valid.csv
 __pycache__
 .vscode
+vocab.p
