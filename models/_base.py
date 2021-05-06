@@ -10,16 +10,18 @@ from typing import List
 import pandas as pd
 import os
 import seaborn as sns
-
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 
 class BaseLine:
     def __init__(self, *args, **kwargs):
         self.dataloader = kwargs["dataloader"]
         self.model      = kwargs["model"]
+        logging.info('[+] Filling dataloader pipeline with preprocessed inputs...')
         self.dataloader.pipeline = Pipeline([("cleaner", self.dataloader.transformers[0]()),
                                              ('vectorizer', self.dataloader.dataset.vectorizer()),
-                                             ('classifier', self.model)]) # preprocessed piepline
+                                             ('classifier', self.model)]) # filling dataloader piepline with preprocessed inputs
 
     def stat(self):
         """
@@ -28,6 +30,7 @@ class BaseLine:
                     recall: tp / (tp + fn)
                     f1: 2 tp / (2 tp + fp + fn)
         """
+        logging.info('[+] Calculating statistical results...')
         predicted = self.dataloader.pipeline.predict(self.dataloader.dataset.x_test)
         mat = confusion_matrix(self.dataloader.dataset.y_test, predicted)
         sns.heatmap(mat.T, square = True, annot=True, fmt = "d", xticklabels=["Positive Review", "Negative Review"], yticklabels=["Positive Review", "Negative Review"])
@@ -45,6 +48,7 @@ class BaseLine:
 
 
     def __call__(self, paths: List[str]):
+        logging.info('[+] Labeling test data using dataloader pipeline...')
         if not os.path.exists(paths[0]): print("[?] CSV Test File Not Found!"); sys.exit(1)
         input_test_data = pd.read_csv(f"{paths[0]}/x_test.csv")
         predicted_input_test_data = self.dataloader.pipeline.predict(input_test_data["text"]) # NOTE - all preprocessing is done through the pipeline estimators we've built
@@ -56,4 +60,9 @@ class BaseLine:
 
 
     def train(self):
+        logging.info('[+] Training through the dataloader pipeline...')
         self.dataloader.pipeline.fit(self.dataloader.dataset.x_train, self.dataloader.dataset.y_train)
+        # NOTE - we can access the vocabulary of our tfidf vectorization algo using 
+        #        self.dataloader.dataset.tfidf_vector.vocabulary_ or self.dataloader.pipeline[1]
+        logging.info('[+] Saving vocabulary at utils/vocabulary/vocab.p')
+        self.dataloader() # NOTE - saving tfidf vocabulary for later usage with other models
