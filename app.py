@@ -2,7 +2,7 @@
 
 import argparse, sys
 from utils import DataLoader, MRSADatasetPipeline, Transformer
-from models import LogisticRegression, LinearRegression, SupportVectorMachine, RandomForest, NaiveBayesian
+from models import _LogisticRegression, SupportVectorMachine, RandomForest, NaiveBayesian
 
 
 # ------------ processing argument options
@@ -24,7 +24,10 @@ training_dataloader = DataLoader(preprocessed=preprocessed, transformers=[Transf
 
 
 # ------------ training process based on selected model
-# ----------------------------------------------------------
+#
+# TODO - try to change all models parameters to get higher accuracies
+#
+# -------------------------------------------------------------------------
 if model == "naive_bayesian":
     model = NaiveBayesian(training_dataloader=training_dataloader)
 elif model == "support_vector_machine":
@@ -32,9 +35,7 @@ elif model == "support_vector_machine":
 elif model == "random_forest":
     model = RandomForest(training_dataloader=training_dataloader)
 elif model == "logistic_regression":
-    model = LogisticRegression(training_dataloader=training_dataloader)
-elif model == "linear_regression":
-    mode = LinearRegression(training_dataloader=training_dataloader)
+    model = _LogisticRegression(training_dataloader=training_dataloader)
 else:
     print("[?] Invalid Model!")
     sys.exit(1)
@@ -44,9 +45,9 @@ model.train()
 # ------------ testing and statistical process based on pre-trained model
 # --------------------------------------------------------------------------
 statistics = model.stat()
-print("\t[+] Accuracy : ", statistics["accuracy"])
-print("\t[+] Precision : ", statistics["precision"])
-print("\t[+] Recall : ", statistics["recall"])
-print("\t[+] f1-score : ", statistics["f1_score"])
+print("\t- Accuracy : ", statistics["accuracy"])
+print("\t- Precision : ", statistics["precision"])
+print("\t- Recall : ", statistics["recall"])
+print("\t- f1-score : ", statistics["f1_score"])
 predicted  = model([test_path])
-print("\t[+] Predicted Label for Test Data : ", predicted)
+print("\t- Predicted Label for Test Data : ", predicted)
