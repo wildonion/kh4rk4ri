@@ -112,4 +112,4 @@ Then we saved our labeled data into a new CSV file based on the selected model.
 
 # Conclusion
 
-We ran all the models using their default parameters and as we can see the best accuracies are belongs to **Support Vector Machine** which has reached the state of the art of our results in classifying the sentiments for our dataset.
+We trianed all the models using their default parameters and as we can see the best accuracies are belongs to **Support Vector Machine** which has reached the state of the art of our results in classifying the sentiments for our dataset.
