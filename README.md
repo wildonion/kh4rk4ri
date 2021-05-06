@@ -55,7 +55,7 @@ Finally we called the `train()` method on the selected model to train it using t
 
 * **Recall:** 0.85526966848095
 
-* **f1_score:** 0.8689204474048009
+* **f1-score:** 0.8689204474048009
 
 # Statistical Results for Logistic Regression
 
@@ -70,7 +70,7 @@ Finally we called the `train()` method on the selected model to train it using t
 
 * **Recall:** 0.9016915910762442
 
-* **f1_score:** 0.8891575003021878
+* **f1-score:** 0.8891575003021878
 
 # Statistical Results for Random Forest
 
@@ -85,7 +85,7 @@ Finally we called the `train()` method on the selected model to train it using t
 
 * **Recall:** 0.8519980266403552
 
-* **f1_score:** 0.8574975173783516
+* **f1-score:** 0.8574975173783516
 
 # Statistical Results for Support Vector Machine
 
@@ -100,7 +100,7 @@ Finally we called the `train()` method on the selected model to train it using t
 
 * **Recall:** 0.9148936170212766
 
-* **f1_score:** 0.8997384481255449
+* **f1-score:** 0.8997384481255449
 
 # Classifying Process on Test Data
 
