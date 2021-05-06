@@ -42,7 +42,7 @@ Finally we called the `train()` method on the selected model to train it using t
 
 [Generated Vocabulary using TF-IDF Vectorization Algorithm](https://github.com/wildonion/mrsa/tree/main/utils/vocabulary)
 
-# Statistical Results for Naive Bayes Multinomial Algorithm
+# Statistical Results for Naive Bayes Multinomial
 
 ### 📊 Confusion Matrix
 <p align="center">
