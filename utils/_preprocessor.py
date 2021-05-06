@@ -65,6 +65,7 @@ class MRSADatasetPipeline(Dataset):
         # NOTE - we're using BOW with TF-IDF normalization for building our vocabulary and feature extraction.
         # self.bag_of_words = CountVectorizer(tokenizer=self.tokenizer, ngram_range=(1,1))
         # self.bag_of_words = HashingVectorizer(tokenizer=self.tokenizer, ngram_range=(1,1))
+        # TODO - try to change the tfidf parameters to get higher accuracies
         self.tfidf_vector = TfidfVectorizer(tokenizer=self.tokenizer)
         return self.tfidf_vector
 
