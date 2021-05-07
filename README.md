@@ -32,7 +32,7 @@ The `MRSADatasetPipeline` class is responsible for tokenizing(lemmatization and 
 
 # Training Process
 
-Training dataloader object built on dataset object is feeded into the various ML models like **Naive Bayesian MultinomialNB**, **Logistic Regression**, **Support Vector Machine** and **Random Forest** to fill its pipeline based on preprocessed and transformed(custom `Transformer` class) data and the selected model.
+Training dataloader object which is built on dataset object is feeded into the various ML models like **Naive Bayesian MultinomialNB**, **Logistic Regression**, **Support Vector Machine** and **Random Forest** to fill its pipeline based on preprocessed and transformed(custom `Transformer` class) data and the selected model.
 
 On training, evaluating and predicting; the data will be feeded into the dataloader pipeline, in order to filter them through three estimators: custom cleaner transformer, `vectorizer()` method of `MRSADatasetPipeline` class which will call the `tokenizer()` method automatically and the selected model.
 
