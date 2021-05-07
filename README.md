@@ -17,7 +17,7 @@ And finally:
 
 > More options: ```python app.py --help```
 
-### Supported Modesl:
+### Supported Models:
 
 * Naive Bayes Multinomial Algorithm
 * Logistic Regression 
