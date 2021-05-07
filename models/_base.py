@@ -19,7 +19,7 @@ class BaseLine:
         self.dataloader = kwargs["dataloader"]
         self.model      = kwargs["model"]
         logging.info('[+] Filling dataloader pipeline with preprocessed inputs...')
-        self.dataloader.pipeline = Pipeline([("cleaner", self.dataloader.transformers[0]()),
+        self.dataloader.pipeline = Pipeline([("cleaner", self.dataloader.transformers[0]()), 
                                              ('vectorizer', self.dataloader.dataset.vectorizer()),
                                              ('classifier', self.model)]) # filling dataloader piepline with preprocessed inputs
 
@@ -31,8 +31,8 @@ class BaseLine:
                     f1: 2 tp / (2 tp + fp + fn)
         """
         logging.info('[+] Calculating statistical results...')
-        predicted = self.dataloader.pipeline.predict(self.dataloader.dataset.x_test)
-        mat = confusion_matrix(self.dataloader.dataset.y_test, predicted)
+        predicted = self.dataloader.pipeline.predict(self.dataloader.dataset.x_valid)
+        mat = confusion_matrix(self.dataloader.dataset.y_valid, predicted)
         sns.heatmap(mat.T, square = True, annot=True, fmt = "d", xticklabels=["Positive Review", "Negative Review"], yticklabels=["Positive Review", "Negative Review"])
         plt.xlabel("true labels")
         plt.ylabel("predicted label")
@@ -40,10 +40,10 @@ class BaseLine:
         cmat_path = os.path.abspath(curr_dir + f"/../utils/cmat/{self.model.__class__.__name__}.png")
         plt.savefig(cmat_path)
         return {
-                "accuracy" : accuracy_score(self.dataloader.dataset.y_test, predicted),
-                "precision": precision_score(self.dataloader.dataset.y_test, predicted),
-                "recall"   : recall_score(self.dataloader.dataset.y_test, predicted),
-                "f1_score" : f1_score(self.dataloader.dataset.y_test, predicted)
+                "accuracy" : accuracy_score(self.dataloader.dataset.y_valid, predicted),
+                "precision": precision_score(self.dataloader.dataset.y_valid, predicted),
+                "recall"   : recall_score(self.dataloader.dataset.y_valid, predicted),
+                "f1_score" : f1_score(self.dataloader.dataset.y_valid, predicted)
                 }
 
 
@@ -55,7 +55,10 @@ class BaseLine:
         input_test_data['label'] = predicted_input_test_data.tolist()
         curr_dir = os.path.dirname(os.path.abspath(__file__))
         labeled_input_test_data = os.path.abspath(curr_dir + f"/../utils/labeled/{self.model.__class__.__name__}.csv")
+        labeled_input_test_data_on_dataset_folder = os.path.abspath(curr_dir + f"/../dataset/test/{self.model.__class__.__name__}-y_test.csv")
         input_test_data.to_csv(labeled_input_test_data, index=False)
+        input_test_data.to_csv(labeled_input_test_data_on_dataset_folder, index=False)
+        logging.info(f'[+] Labeled test data saved at {labeled_input_test_data} and {labeled_input_test_data_on_dataset_folder}')
         return predicted_input_test_data
 
 
