@@ -1,19 +1,21 @@
 # Setup
 
 ### pip
-```console pip install -r requirements.txt```
+```pip install -r requirements.txt```
 
 ### Anaconda
 
-```console conda create --name mrsa --file requirements.txt && conda activate mrsa```
+```conda create --name mrsa --file requirements.txt && conda activate mrsa```
 
 And finally:
 
-```console python -m spacy download en```
+```python -m spacy download en```
 
 # Usage
 
-```console python app.py --model support_vector_machine --train-path dataset/train --valid-path dataset/valid --test-path dataset/test```
+```console 
+python app.py --model support_vector_machine --train-path dataset/train --valid-path dataset/valid --test-path dataset/test
+```
 
 > More options: ```python app.py --help```
 
