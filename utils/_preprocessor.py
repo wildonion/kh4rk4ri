@@ -14,6 +14,7 @@ from spacy.lang.en import English
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, HashingVectorizer
 import spacy
 spacy.load('en')
+import pickle
 
 
 __all__ = ["MRSADatasetPipeline"]
@@ -21,16 +22,14 @@ __all__ = ["MRSADatasetPipeline"]
 
 class MRSADatasetPipeline(Dataset):
     def __init__(self, paths: List[str]):
-        if not os.path.exists(paths[0]): print("[?] CSV Datasets Not Found!"); sys.exit(1)
-        self.__data_path    = f"{paths[0]}/x_train.csv"
-        self.__labels_path  = f"{paths[0]}/y_train.csv"
+        if not os.path.exists(paths[0]) or not os.path.exists(paths[1]): print("[?] CSV Datasets Not Found!"); sys.exit(1)
         self.__parser       = English()
         self.__punctuations = string.punctuation
         self.__stop_words   = STOP_WORDS
-        self.x_train        = pd.read_csv(self.__data_path)["text"]
-        self.y_train        = pd.read_csv(self.__labels_path)["label"] 
-        self.x_test         = None
-        self.y_test         = None
+        self.x_train        = pd.read_csv(f"{paths[0]}/x_train.csv")["text"]
+        self.y_train        = pd.read_csv(f"{paths[0]}/y_train.csv")["label"] 
+        self.x_valid        = pd.read_csv(f"{paths[1]}/x_valid.csv")["text"]
+        self.y_valid        = pd.read_csv(f"{paths[1]}/y_valid.csv")["label"]
         self.bag_of_words   = None
         self.tfidf_vector   = None
 
@@ -65,8 +64,13 @@ class MRSADatasetPipeline(Dataset):
         # NOTE - we're using BOW with TF-IDF normalization for building our vocabulary and feature extraction.
         # self.bag_of_words = CountVectorizer(tokenizer=self.tokenizer, ngram_range=(1,1))
         # self.bag_of_words = HashingVectorizer(tokenizer=self.tokenizer, ngram_range=(1,1))
-        # TODO - try to change the tfidf parameters to get higher accuracies
         self.tfidf_vector = TfidfVectorizer(tokenizer=self.tokenizer)
+        curr_dir = os.path.dirname(os.path.abspath(__file__))
+        vocab_path = os.path.abspath(curr_dir + f"/../utils/vocabulary/vocab.p")
+        if os.path.exists(vocab_path):
+            vocab_file = open(vocab_path, 'rb')
+            vocabulary = pickle.load(vocab_file)
+            self.tfidf_vector.vocabulary_ = vocabulary
         return self.tfidf_vector
 
 
