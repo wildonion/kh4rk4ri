@@ -102,7 +102,7 @@ To train the model using the training dataloader object pipeline we called the `
 
 For testing our models we've just passed the CSV file path of the test data through the model call pattern(`__call__`) and used the built-in piepline inside the `DataLoader` class using its `.predict()` method to predict the labels for our CSV test data. The reason for that is because the input data into the model needs to be proprocessed just like we did with the training data. Fortunately our `DataLoader` pipeline object which is filled inside of our `BaseLine` class based on preprocessed and transformed(using `Transformer` class) data and the selected model, will do the preprocessing of the feeded test data into the selected model for us automatically everytime in the first run of our app.
 
-Then we saved our labeled data into a new CSV file based on the selected model.
+ > Labeled test data into a new CSV file based on the selected model:
 
 [Labeled Test Data using Support Vector Machine](https://github.com/wildonion/mrsa/blob/main/utils/labeled/SVC.csv)
 
