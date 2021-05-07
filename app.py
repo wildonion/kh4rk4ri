@@ -10,14 +10,16 @@ from models import _LogisticRegression, SupportVectorMachine, RandomForest, Naiv
 parser = argparse.ArgumentParser(description='Movie Review Sentiment Analysis')
 parser.add_argument('--model', action='store', type=str, help='naive_bayesian, support_vector_machine, random_forest, logistic_regression, linear_regression.', required=True)
 parser.add_argument('--train-path', action='store', type=str, help='The training data CSV file path.', required=True)
+parser.add_argument('--valid-path', action='store', type=str, help='The valid data CSV file path.', required=True)
 parser.add_argument('--test-path', action='store', type=str, help='The data CSV file path to test the pre-trained model.', required=True)
 
 args                = parser.parse_args()
 model               = args.model
 train_path          = args.train_path
 test_path           = args.test_path
-preprocessed        = MRSADatasetPipeline(paths=[train_path])
-training_dataloader = DataLoader(preprocessed=preprocessed, transformers=[Transformer], shuffle=True)
+valid_path          = args.valid_path
+dataset             = MRSADatasetPipeline(paths=[train_path, valid_path])
+training_dataloader = DataLoader(dataset=dataset, transformers=[Transformer])
 # print(f"[+] preprocessed length : {len(preprocessed)}") # NOTE - testing desing pattern
 # print(f"[+] the third sample is : {preprocessed[2]}") # NOTE - testing desing pattern
 
@@ -50,4 +52,3 @@ print("\t- Precision : ", statistics["precision"])
 print("\t- Recall : ", statistics["recall"])
 print("\t- f1-score : ", statistics["f1_score"])
 predicted  = model([test_path])
-print("\t- Predicted Label for Test Data : ", predicted)
