@@ -13,7 +13,7 @@ And finally:
 
 # Usage
 
-```python app.py --model naive_bayesian --train-path dataset/train --test-path dataset/test```
+```python app.py --model support_vector_machine --train-path dataset/train --valid-path dataset/valid --test-path dataset/test```
 
 > More options: ```python app.py --help```
 
@@ -24,15 +24,9 @@ And finally:
 * Random Forest
 * Support Vector Machine
 
-# Dataset
-
-[Movie Review Dataset](https://github.com/HamedBabaei/ML992/tree/main/dataset)
-
 # Preprocessing
 
-The `MRSADatasetPipeline` class is responsible for tokenizing(lemmatization and lowercase converting), cleaning(stopwords and punctuations removal) and vectorization using BOW with TF-IDF normalization.
-
-Preprocessed input texts of our training documents are passed through the `DataLoader` object to split the training documents into `x_train`, `y_train`, `x_test` and `y_test` with 20 percent of test data.
+The `MRSADatasetPipeline` class is responsible for tokenizing(lemmatization and lowercase converting), cleaning(stopwords and punctuations removal) and vectorization using BOW with TF-IDF normalization of our training, valid and testing documents.
 
 # Training Process
 
@@ -94,13 +88,13 @@ Finally we called the `train()` method on the selected model to train it using t
     <img src="https://github.com/wildonion/mrsa/blob/main/utils/cmat/SVC.png">
 </p>
 
-* **Accuracy:** 0.899375
+* **Accuracy:** 0.8978
 
-* **Precision:** 0.8850771869639794
+* **Precision:** 0.8856372737774355
 
-* **Recall:** 0.9148936170212766
+* **Recall:** 0.9148766905330151
 
-* **f1-score:** 0.8997384481255449
+* **f1-score:** 0.9000195656427313
 
 # Classifying Process on Test Data
 
@@ -108,7 +102,13 @@ For testing our models we've just passed the CSV file path of the test data thro
 
 Then we saved our labeled data into a new CSV file based on the selected model.
 
-[Labeled Test Data Based on Selected Model](https://github.com/wildonion/mrsa/tree/main/utils/labeled)
+[Labeled Test Data using Support Vector Machine](https://github.com/wildonion/mrsa/blob/main/utils/labeled/SVC.csv)
+
+[Labeled Test Data using Naive Bayes Multinomial](https://github.com/wildonion/mrsa/blob/main/utils/labeled/MultinomialNB.csv)
+
+[Labeled Test Data using Naive Random Forest](https://github.com/wildonion/mrsa/blob/main/utils/labeled/RandomForestClassifier.csv)
+
+[Labeled Test Data using Logistic Regression](https://github.com/wildonion/mrsa/blob/main/utils/labeled/LogisticRegression.csv)
 
 # Conclusion
 
