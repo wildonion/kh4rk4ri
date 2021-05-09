@@ -17,5 +17,5 @@ __all__ = ["NaiveBayesian"]
 
 class NaiveBayesian(BaseLine):
     def __init__(self, training_dataloader: DataLoader):
-        args = {"dataloader": training_dataloader, "model": MultinomialNB()}
+        args = {"dataloader": training_dataloader, "model": MultinomialNB(), "class_name": self.__class__.__name__}
         super().__init__(**args)
