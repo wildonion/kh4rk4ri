@@ -1,8 +1,10 @@
 
 
-import argparse, sys
+import argparse, sys, os
 from utils import DataLoader, MRSADatasetPipeline, Transformer
 from models import _LogisticRegression, SupportVectorMachine, RandomForest, NaiveBayesian
+import logging, pickle
+logging.basicConfig(level=logging.DEBUG)
 
 
 # ------------ processing argument options
@@ -26,22 +28,27 @@ training_dataloader = DataLoader(dataset=dataset, transformers=[Transformer])
 
 
 # ------------ training process based on selected model
-#
-# TODO - try to change all models parameters to get higher accuracies
-#
 # -------------------------------------------------------------------------
-if model == "naive_bayesian":
-    model = NaiveBayesian(training_dataloader=training_dataloader)
-elif model == "support_vector_machine":
-    model = SupportVectorMachine(training_dataloader=training_dataloader)
-elif model == "random_forest":
-    model = RandomForest(training_dataloader=training_dataloader)
-elif model == "logistic_regression":
-    model = _LogisticRegression(training_dataloader=training_dataloader)
+if os.path.exists('utils/model/BaseLine.bcls'):
+    logging.info('[+] Loading last saved BaseLine class. Delete it if you want to train a new model!')
+    curr_dir = os.path.dirname(os.path.abspath(__file__))
+    BaseLine_path = os.path.abspath(curr_dir + f"/utils/model/BaseLine.bcls")
+    BaseLine_file = open(BaseLine_path, 'rb')
+    model = pickle.load(BaseLine_file)
 else:
-    print("[?] Invalid Model!")
-    sys.exit(1)
-model.train()
+    logging.info('[+] Training on selected model...')
+    if model == "naive_bayesian":
+        model = NaiveBayesian(training_dataloader=training_dataloader)
+    elif model == "support_vector_machine":
+        model = SupportVectorMachine(training_dataloader=training_dataloader)
+    elif model == "random_forest":
+        model = RandomForest(training_dataloader=training_dataloader)
+    elif model == "logistic_regression":
+        model = _LogisticRegression(training_dataloader=training_dataloader)
+    else:
+        print("[?] Invalid Model!")
+        sys.exit(1)
+    model.train()
 
 
 # ------------ testing and statistical process based on pre-trained model
@@ -51,4 +58,14 @@ print("\t- Accuracy : ", statistics["accuracy"])
 print("\t- Precision : ", statistics["precision"])
 print("\t- Recall : ", statistics["recall"])
 print("\t- f1-score : ", statistics["f1_score"])
+print("\t- ROC AUC score : ", statistics["roc_auc_score"])
+print("\t- TN : ", statistics["cmat"]["TN"])
+print("\t- FP : ", statistics["cmat"]["FP"])
+print("\t- FN : ", statistics["cmat"]["FN"])
+print("\t- TP : ", statistics["cmat"]["TP"])
 predicted  = model([test_path])
+
+
+# NOTE - testing design pattern
+# model.dataloader.pipeline[1].vocabulary_
+# model.dataloader.dataset.tfidf_vector.vocabulary_
