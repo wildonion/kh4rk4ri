@@ -9,12 +9,12 @@ from ._data import Dataset
 from typing import List
 import pandas as pd
 import os, string
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, HashingVectorizer
 from spacy.lang.en.stop_words import STOP_WORDS
 from spacy.lang.en import English
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, HashingVectorizer
 import spacy
 spacy.load('en')
-import pickle
+
 
 
 __all__ = ["MRSADatasetPipeline"]
@@ -32,7 +32,6 @@ class MRSADatasetPipeline(Dataset):
         self.y_valid        = pd.read_csv(f"{paths[1]}/y_valid.csv")["label"]
         self.bag_of_words   = None
         self.tfidf_vector   = None
-
 
     def __getitem__(self, idx):
         return self.x_train[idx], self.y_train[idx]
@@ -55,22 +54,14 @@ class MRSADatasetPipeline(Dataset):
         
 
     def vectorizer(self):
+        # NOTE - text classification is a high-dimensional problem, where the dimensionality equals the size of the vocabulary
         # NOTE - in BOW we'll have frequencies, rather than just 1 or 0 for their occurrence in ngram.
         # NOTE - CountVectorizer, HashingVectorizer and TfidfVectorizer will crash on making a huge 
-        #        vocabulary dictionary based on a dense matrix in memory when we're trying to 
-        #        use naive bayes gaussian algo. cause the inputs of the naive bayes gaussian model 
-        #        is a dense matrix and as the name of the algo says it's based on probability distribution 
-        #        not a sparse matrix which is the output of vectorization algos.   
+        #        vocabulary dictionary when we're turning it into a dense matrix, cause their output is a sparse matrix.
+        # NOTE - the output of vectorization algos is a sparse matrix and the inputs of the naive bayes gaussian model 
+        #        is a dense matrix which as the name of the algo says it's based on probability distribution. 
         # NOTE - we're using BOW with TF-IDF normalization for building our vocabulary and feature extraction.
         # self.bag_of_words = CountVectorizer(tokenizer=self.tokenizer, ngram_range=(1,1))
         # self.bag_of_words = HashingVectorizer(tokenizer=self.tokenizer, ngram_range=(1,1))
         self.tfidf_vector = TfidfVectorizer(tokenizer=self.tokenizer)
-        curr_dir = os.path.dirname(os.path.abspath(__file__))
-        vocab_path = os.path.abspath(curr_dir + f"/../utils/vocabulary/vocab.p")
-        if os.path.exists(vocab_path):
-            vocab_file = open(vocab_path, 'rb')
-            vocabulary = pickle.load(vocab_file)
-            self.tfidf_vector.vocabulary_ = vocabulary
         return self.tfidf_vector
-
-
