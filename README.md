@@ -57,14 +57,6 @@ To train the model using the training dataloader object pipeline we called the `
 
 * **ROC AUC score:** 0.866257405832247
 
-* **TN:** 2179
-
-* **FP:**  307
-
-* **FN:**  362
-
-* **TP:**  2152
-
 # Statistical Results for Logistic Regression
 
 ### 📊 Confusion Matrix
@@ -81,14 +73,6 @@ To train the model using the training dataloader object pipeline we called the `
 * **f1-score:** 0.8945824369254841
 
 * **ROC AUC score:** 0.8921014163004152
-
-* **TN:** 2174
-
-* **FP:**  312
-
-* **FN:**  227
-
-* **TP:**  2287
 
 # Statistical Results for Random Forest
 
@@ -107,14 +91,6 @@ To train the model using the training dataloader object pipeline we called the `
 
 * **ROC AUC score:** 0.853396522514946
 
-* **TN:** 2120
-
-* **FP:**  366
-
-* **FN:**  367
-
-* **TP:**  2147
-
 # Statistical Results for Support Vector Machine
 
 ### 📊 Confusion Matrix
@@ -131,14 +107,6 @@ To train the model using the training dataloader object pipeline we called the `
 * **f1-score:** 0.9005687389684252
 
 * **ROC AUC score:** 0.8985172975024497
-
-* **TN:** 2197
-
-* **FP:** 289
-
-* **FN:** 218
-
-* **TP:** 2296
 
 # Classifying Process on Test Data
 
