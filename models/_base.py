@@ -49,8 +49,7 @@ class BaseLine:
                 "precision"    : precision_score(self.dataloader.dataset.y_valid, predicted),
                 "recall"       : recall_score(self.dataloader.dataset.y_valid, predicted),
                 "f1_score"     : f1_score(self.dataloader.dataset.y_valid, predicted),
-                "roc_auc_score": roc_auc_score(self.dataloader.dataset.y_valid, predicted),
-                "cmat"         : {"TN": mat[0][0], "FP": mat[0][1], "FN": mat[1][0], "TP": mat[1][1]}
+                "roc_auc_score": roc_auc_score(self.dataloader.dataset.y_valid, predicted)
                 }
 
 
