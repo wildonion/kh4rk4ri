@@ -32,7 +32,7 @@ The `MRSADatasetPipeline` class is responsible for tokenizing(lemmatization and 
 
 # Training Process
 
-Training dataloader object which is built on dataset object is feeded into the various ML models like **Naive Bayesian MultinomialNB**, **Logistic Regression**, **Support Vector Machine** and **Random Forest** to fill its pipeline based on preprocessed and transformed(custom `Transformer` class) data and the selected model.
+Training dataloader object which is built on dataset object is feeded into the various ML models like **Naive Bayesian MultinomialNB**, **Logistic Regression**, **Support Vector Machine**, **SGD Classifier** and **Random Forest** to fill its pipeline based on preprocessed and transformed(custom `Transformer` class) data and the selected model.
 
 On training, evaluating and predicting; the data will be feeded into the dataloader pipeline, in order to filter them through three estimators: custom cleaner transformer, `vectorizer()` method of `MRSADatasetPipeline` class which will call the `tokenizer()` method automatically and the selected model.
 
@@ -91,6 +91,23 @@ To train the model using the training dataloader object pipeline we called the `
 
 * **ROC AUC score:** 0.853396522514946
 
+# Statistical Results for SGD Classifier
+
+### 📊 Confusion Matrix
+<p align="center">
+    <img src="https://github.com/wildonion/mrsa/blob/main/utils/cmat/SGDClassifier.png">
+</p>
+
+* **Accuracy:** 0.8948
+
+* **Precision:** 0.8864696734059098
+
+* **Recall:** 0.9069212410501193
+
+* **f1-score:** 0.8965788438851748
+
+* **ROC AUC score:** 0.8947317387873284
+
 # Statistical Results for Support Vector Machine
 
 ### 📊 Confusion Matrix
@@ -122,6 +139,8 @@ For testing our models we've just passed the CSV file path of the test data thro
 
 [Labeled Test Data using Logistic Regression](https://github.com/wildonion/mrsa/blob/main/utils/labeled/LogisticRegression.csv)
 
+[Labeled Test Data using SGD Classifier](https://github.com/wildonion/mrsa/blob/main/utils/labeled/SGDClassifier.csv)
+
 # Conclusion
 
-We trianed all the models using their default parameters and as we can see the best accuracies are belongs to **Support Vector Machine** with **kernel** and **C** equal to `rbf` and `1E5` respectively which has reached the state of the art of our results in classifying the sentiments for our dataset.
+As we can see the best accuracies are belongs to **Support Vector Machine** with **kernel** and **C** equal to `rbf` and `1E5` respectively which has reached the state of the art of our results in classifying the sentiments for our dataset.

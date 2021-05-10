@@ -2,7 +2,7 @@
 
 import argparse, sys, os
 from utils import DataLoader, MRSADatasetPipeline, Transformer
-from models import _LogisticRegression, SupportVectorMachine, RandomForest, NaiveBayesian
+from models import _LogisticRegression, _SGDClassifier, SupportVectorMachine, RandomForest, NaiveBayesian
 import logging, pickle
 logging.basicConfig(level=logging.DEBUG)
 
@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.DEBUG)
 # ------------ processing argument options
 # -----------------------------------------------
 parser = argparse.ArgumentParser(description='Movie Review Sentiment Analysis')
-parser.add_argument('--model', action='store', type=str, help='naive_bayesian, support_vector_machine, random_forest, logistic_regression, linear_regression.', required=True)
+parser.add_argument('--model', action='store', type=str, help='naive_bayesian, support_vector_machine, random_forest, logistic_regression, sgd_classifier.', required=True)
 parser.add_argument('--train-path', action='store', type=str, help='The training data CSV file path.', required=True)
 parser.add_argument('--valid-path', action='store', type=str, help='The valid data CSV file path.', required=True)
 parser.add_argument('--test-path', action='store', type=str, help='The data CSV file path to test the pre-trained model.', required=True)
@@ -37,7 +37,9 @@ if os.path.exists('utils/model/BaseLine.bcls'):
     model = pickle.load(BaseLine_file)
 else:
     logging.info('[+] Training on selected model...')
-    if model == "naive_bayesian":
+    if model == "sgd_classifier":
+        model = _SGDClassifier(training_dataloader=training_dataloader)
+    elif model == "naive_bayesian":
         model = NaiveBayesian(training_dataloader=training_dataloader)
     elif model == "support_vector_machine":
         model = SupportVectorMachine(training_dataloader=training_dataloader)
