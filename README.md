@@ -25,6 +25,7 @@ python app.py --model support_vector_machine --train-path dataset/train --valid-
 * Logistic Regression 
 * Random Forest
 * Support Vector Machine
+* SGD Classifier
 
 # Preprocessing
 
