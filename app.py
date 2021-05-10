@@ -59,10 +59,6 @@ print("\t- Precision : ", statistics["precision"])
 print("\t- Recall : ", statistics["recall"])
 print("\t- f1-score : ", statistics["f1_score"])
 print("\t- ROC AUC score : ", statistics["roc_auc_score"])
-print("\t- TN : ", statistics["cmat"]["TN"])
-print("\t- FP : ", statistics["cmat"]["FP"])
-print("\t- FN : ", statistics["cmat"]["FN"])
-print("\t- TP : ", statistics["cmat"]["TP"])
 predicted  = model([test_path])
 
 
