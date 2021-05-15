@@ -1,6 +1,9 @@
 
 
-# NOTE - child class attributes accessing inside parent class when the parent is an abstract class means there is no object or instance exist from it
+# NOTE - accessing child class attributes inside the parent class when the parent is an abstract class.
+# NOTE - abstract class means there is no object or instance exist from the class
+
+
 # https://stackoverflow.com/questions/25062114/calling-child-class-method-from-parent-class-file-in-python
 
 class parent:
