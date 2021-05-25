@@ -28,8 +28,9 @@ class child(parent):
     def __init__(self):
         self.msg = "inside child class"
         self.args = {"name": "wildonion", "id": "999367704"}
-        super().__init__(**self.args)
-    
+        super().__init__(**self.args) # calling parent constructor without building an instance from it, at this moment the compiler knows the parent calss as an abstract class.
+        parent(self.args) # calling parent constructor by building an instance from it, at this moment the compiler know that there is an instance of parent class allocated in ram.
+        
     def __repr__(self):
         return "child class repr"
 
