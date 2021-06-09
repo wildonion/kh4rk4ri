@@ -29,7 +29,7 @@ python app.py --model support_vector_machine --train-path dataset/train --valid-
 
 # Abstract
 
-One of the most challenging analytical problems in the world of natural language processing is the analysis of hidden emotions in the text such as news and user comments about a movie website.
+One of the most challenging analytical problems in the world of natural language processing is the analysis of hidden emotions in the text such as news or user comments about a specific subject like movies of a website.
 Therefor due to the high volume of data collected by web servers around the world, using mathematical model tools based on AI technology can be a great solution to solve this problem.
 In this project we have tried to train various mathematical models in order to reach the state of the art of the result accuracy on our review datasets.
 In the following, we will review the steps performed to train these models and examine each of these models
