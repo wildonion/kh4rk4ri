@@ -45,7 +45,7 @@ Training dataloader object which is built on dataset object is feeded into the v
 
 On training, evaluating and predicting; the data will be feeded into the dataloader pipeline, in order to filter them through three estimators: custom cleaner transformer, `vectorizer()` method of `MRSADatasetPipeline` class which will call the `tokenizer()` method automatically and the selected model.
 
-To train the model using the training dataloader object pipeline we called the `train()` method on the selected model in our `app.py`. After the training is over we called `self.__save()` method inside the `train` method in `BaseLine` class to save the whole `BaseLine` class for later tests. Below are calculated and plotted statistical results like confusion matrix for each model.
+To train the model using the training dataloader object pipeline we called the `train()` method on the selected model in our `app.py`. After the training is over we called `self.__save()` method inside the `train()` method in `BaseLine` class to save the whole `BaseLine` class for later tests. Below are calculated and plotted statistical results like confusion matrix for each model.
 
 [BaseLine Class](https://github.com/wildonion/mrsa/tree/main/utils/model)
 
